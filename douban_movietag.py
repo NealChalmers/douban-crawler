@@ -17,7 +17,7 @@ pages = 3      #爬取的电影页数，每页20部
 
 movie_title = []            #电影名字
 movie_country = []          #国家
-movie_diector = []          #导演
+movie_director = []         #导演
 movie_sceeenWriter = []     #编剧
 movie_actor = []            #主演
 movie_type = []             #类型
@@ -74,11 +74,11 @@ for c in range(pages):              #查看URL发现第一个是0，选3页看�
             movie_country.append(country_name[0])
         else:
             movie_country.append('')
-        diector_name = bs1.find('span', class_='attrs')  # 导演
-        if (diector_name):
-            movie_diector.append(diector_name.get_text())
+        director_name = bs1.find('span', class_='attrs')  # 导演
+        if (director_name):
+            movie_director.append(director_name.get_text())
         else:
-            movie_diector.append('')
+            movie_director.append('')
         screenWriter_name = bs1.find_all('span', class_='attrs')  # 编剧
         if (screenWriter_name):
             movie_sceeenWriter.append(screenWriter_name[len(screenWriter_name) - 2].get_text())
@@ -139,8 +139,8 @@ for q in range(0, len(movie_title)):
     sheet1.write(q + 1, 0, movie_title[q])
 for y in range(0, len(movie_country)):
     sheet1.write(y + 1, 1, movie_country[y])
-for w in range(0, len(movie_diector)):
-    sheet1.write(w + 1, 2, movie_diector[w])
+for w in range(0, len(movie_director)):
+    sheet1.write(w + 1, 2, movie_director[w])
 for e in range(0, len(movie_sceeenWriter)):
     sheet1.write(e + 1, 3, movie_sceeenWriter[e])
 for r in range(0, len(movie_actor)):
