@@ -249,7 +249,8 @@ for e in range(len(movie_screenWriter)):
         sheet1.write(e + 1, 10, temp_screenWriter[1])
 for i in range(len(screenWriter_id)):  # 编剧 ID
     temp_id = screenWriter_id[i]
-    sheet1.write(i + 1, 9, temp_id[0])
+    if(len(temp_id) > 0)
+		sheet1.write(i + 1, 9, temp_id[0])
     if (len(temp_id) > 1):
         sheet1.write(i + 1, 11, temp_id[1])
 for t in range(len(movie_type)):  # 类型
