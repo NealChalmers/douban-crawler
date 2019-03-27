@@ -106,13 +106,13 @@ for c in range(pages_start, pages_end):  # 查看URL发现第一个是0，选3�
 
             proxies = [  # 代理IP池
                 '116.209.55.73:9999',
-                '110.52.235.129	:9999',
+                '110.52.235.129    :9999',
                 '114.88.53.19:53281',
-                '111.160.236.84	:39692',
+                '111.160.236.84    :39692',
                 '222.92.112.69:8080',
                 '171.37.153.55:9797',
-                '116.209.54.228	:9999',
-                '110.52.235.101	:9999',
+                '116.209.54.228    :9999',
+                '110.52.235.101    :9999',
                 '116.209.57.20:9999'
             ]
             pro_ip = random.choice(proxies)
@@ -239,19 +239,20 @@ for w in range(len(movie_director)):
         sheet1.write(w + 1, 6, temp_director[1])
 for i in range(len(director_id)):  # 导演 ID
     temp_id = director_id[i]
-    sheet1.write(i + 1, 5, temp_id[0])
-    if (len(temp_id) > 1):
+    if len(temp_id) > 0:
+        sheet1.write(i + 1, 5, temp_id[0])
+    if len(temp_id) > 1:
         sheet1.write(i + 1, 7, temp_id[1])
 for e in range(len(movie_screenWriter)):
     temp_screenWriter = movie_screenWriter[e].split(' / ')
     sheet1.write(e + 1, 8, temp_screenWriter[0])
-    if (len(temp_screenWriter) > 1):
+    if len(temp_screenWriter) > 1:
         sheet1.write(e + 1, 10, temp_screenWriter[1])
 for i in range(len(screenWriter_id)):  # 编剧 ID
     temp_id = screenWriter_id[i]
-    if(len(temp_id) > 0)
-		sheet1.write(i + 1, 9, temp_id[0])
-    if (len(temp_id) > 1):
+    if len(temp_id) > 0:
+        sheet1.write(i + 1, 9, temp_id[0])
+    if len(temp_id) > 1:
         sheet1.write(i + 1, 11, temp_id[1])
 for t in range(len(movie_type)):  # 类型
     for r in range(len(movie_type[t])):
