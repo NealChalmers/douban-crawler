@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 
 # 以下是电影标签页的爬取参数
 urls = []  # 电影链接
-year = 2016  # 要爬取的年份
+year = 2006  # 要爬取的年份
 pages_start = 0  # 爬取的电影页数，每页20部
 pages_end = 25
 
@@ -96,7 +96,7 @@ for c in range(pages_start, pages_end):  # 查看URL发现第一个是0，选3�
         # casts=dict['casts']          #字典dict[casts]的值又是一个列表
         # print (casts)
         url = dict['url']
-        time.sleep(0.5 + random.random() * 1.5)
+        time.sleep(0.2 + random.random() * 0.8)
         # print ('片名：{}\n评分：{}\n主演：{}\n地址：{}'.format(title,rate,'，'.join(casts),url))
         try:
             response_link = request.Request(url)
@@ -106,13 +106,13 @@ for c in range(pages_start, pages_end):  # 查看URL发现第一个是0，选3�
 
             proxies = [  # 代理IP池
                 '116.209.55.73:9999',
-                '110.52.235.129    :9999',
+                '110.52.235.129:9999',
                 '114.88.53.19:53281',
-                '111.160.236.84    :39692',
+                '111.160.236.84:39692',
                 '222.92.112.69:8080',
                 '171.37.153.55:9797',
-                '116.209.54.228    :9999',
-                '110.52.235.101    :9999',
+                '116.209.54.228:9999',
+                '110.52.235.101:9999',
                 '116.209.57.20:9999'
             ]
             pro_ip = random.choice(proxies)
@@ -128,7 +128,7 @@ for c in range(pages_start, pages_end):  # 查看URL发现第一个是0，选3�
             content_link = request.urlopen(response_link).read().decode('utf-8', 'ignore')
         except urllib.error.URLError:
             continue
-        movie_id.append(re.compile("(\d+)").findall(url))  # 电影 ID
+        movie_id.append(re.compile("(\d{5}\d*)").findall(url))  # 电影 ID
         bs1 = BeautifulSoup(content_link, 'lxml')
         title = bs1.title
         if (title):
@@ -147,20 +147,22 @@ for c in range(pages_start, pages_end):  # 查看URL发现第一个是0，选3�
         attrs_name = bs1.find_all('span', class_='attrs')  # 导演
         if (len(attrs_name) > 0):
             movie_director.append(attrs_name[0].get_text())
-            director_id.append(re.compile('(\d+)').findall(str(attrs_name[0])))
+            director_id.append(re.compile("(\d{5}\d*)").findall(str(attrs_name[0])))
         else:
             movie_director.append('')
             director_id.append('')
         if (len(attrs_name) > 1):
             movie_screenWriter.append(attrs_name[1].get_text())
-            screenWriter_id.append(re.compile('(\d+)').findall(str(attrs_name[1])))
+            screenWriter_id.append(re.compile("(\d{5}\d*)").findall(str(attrs_name[1])))
         else:
             movie_screenWriter.append('')
+            screenWriter_id.append('')
         if (len(attrs_name) > 2):  # 主演
             movie_actor.append(attrs_name[2].get_text())
-            actor_id.append(re.compile('(\d+)').findall(str(attrs_name[2])))
+            actor_id.append(re.compile("(\d{5}\d*)").findall(str(attrs_name[2])))
         else:
             movie_actor.append('')
+            actor_id.append('')
         type_name = bs1.find_all('span', property="v:genre")  # 类型
         temp_name = []
         for t in range(len(type_name)):
