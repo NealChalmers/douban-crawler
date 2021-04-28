@@ -2,6 +2,6 @@ package sse
 
 import "fmt"
 
-func ffff() {
+func Gffff() {
 	fmt.Println("fdafad")
 }
